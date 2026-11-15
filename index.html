@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PANDA — Fisch, automated</title>
+  <meta name="description" content="PANDA is a Windows tool for Fisch: it casts, reels and reads the minigame, and draws an overlay over the game marking every fish in the water. Its own process, memory reads only, nothing injected." />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:title" content="PANDA — Fisch, automated" />
+  <meta property="og:description" content="Casts, reels, reads the minigame, and marks every fish in the water. External process. Memory reads only." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Work+Sans:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="#top" aria-label="PANDA">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="9.4" cy="9" r="4.6" fill="currentColor" />
+        <circle cx="22.6" cy="9" r="4.6" fill="currentColor" />
+        <circle cx="16" cy="17.4" r="9.6" fill="currentColor" />
+        <ellipse cx="12.1" cy="15.8" rx="2.5" ry="3.1" fill="#000" transform="rotate(-20 12.1 15.8)" />
+        <ellipse cx="19.9" cy="15.8" rx="2.5" ry="3.1" fill="#000" transform="rotate(20 19.9 15.8)" />
+      </svg>
+      <span class="wordmark">PANDA</span>
+      <span class="ver" data-manifest="version">v1.1.13</span>
+    </a>
+    <nav class="bar-nav" aria-label="Sections">
+      <a href="#what">What it does</a>
+      <a href="#runs">How it runs</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-sm" id="bar-download" href="https://github.com/lolcaken/the-moath-macro/releases/latest">Download</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Windows 10 / 11 &middot; x64 &middot; external process</p>
+      <h1>Fisch,<br />automated.</h1>
+      <p class="lede">
+        Casts, reels, reads the minigame. Marks every fish and relic in the water with a
+        box, name, rarity and distance. Its own process, memory reads only &mdash; nothing
+        loaded into the game.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-solid" id="dl-setup" href="https://github.com/lolcaken/the-moath-macro/releases/latest">
+          <span>Download for Windows</span>
+          <span class="btn-size" data-manifest="size-setup">4.58 MB</span>
+        </a>
+        <a class="btn" id="dl-zip" href="https://github.com/lolcaken/the-moath-macro/releases/latest">Portable .zip</a>
+      </div>
+
+      <dl class="meta">
+        <div>
+          <dt>Version</dt>
+          <dd data-manifest="version">v1.1.13</dd>
+        </div>
+        <div>
+          <dt>Portable size</dt>
+          <dd data-manifest="size-zip">3.98 MB</dd>
+        </div>
+        <div class="meta-sha">
+          <dt>SHA-256 <button class="copy" id="copy-sha" type="button">copy</button></dt>
+          <dd><code data-manifest="sha">3f9f8da2&hellip;43bce51</code></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="what" class="section">
+      <h2 class="kicker">What it does</h2>
+      <ol class="rows">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h3>Fishing</h3>
+            <p>Casts on a loop, lands a perfect cast, watches the reel bar and plays the minigame out. Four minigame controllers ship: Lullaby, Maelstrom, Noiseform and Pinions Aria. Timing is jittered so a session doesn't read like a metronome.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h3>Fish &amp; relic overlay</h3>
+            <p>A click-through window over the game marks every roaming fish with name, rarity and distance. Rarity filters, tracers, edge markers and per-tier colours. Relics get their own switch and palette.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h3>Harpoon</h3>
+            <p>Targets by rarity and range, aims with a sampled controller and throws. Used instead of rod fishing when the water needs clearing.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="runs" class="section">
+      <h2 class="kicker">How it runs</h2>
+      <p class="section-lede">Three processes. If one falls over, the game doesn't notice.</p>
+      <div class="grid3">
+        <article>
+          <h3>BlackPANDA.exe</h3>
+          <p>The window. Holds settings, writes config, starts and stops the rest.</p>
+        </article>
+        <article>
+          <h3>BlackPandaCore.exe</h3>
+          <p>Attaches to the client read-only, resolves offsets, runs the automation modules.</p>
+        </article>
+        <article>
+          <h3>BlackPandaOverlay.exe</h3>
+          <p>Owns the overlay window. 60 fps, per-pixel alpha, F8 to hide.</p>
+        </article>
+      </div>
+      <p class="fine">
+        The core opens the game with <code>PROCESS_VM_READ</code> and nothing else. No
+        writes, no injection, no DLLs. Input is synthesised the way a keyboard does it.
+      </p>
+    </section>
+
+    <section id="faq" class="section">
+      <h2 class="kicker">FAQ</h2>
+      <details>
+        <summary>Where should I download it from?</summary>
+        <p>This page. Builds posted anywhere else aren't ours. Compare the SHA-256 above with the file you get.</p>
+      </details>
+      <details>
+        <summary>Does it inject into the game?</summary>
+        <p>No. The core reads memory, the overlay draws in its own window, the macro sends input. Nothing is loaded into the game process.</p>
+      </details>
+      <details>
+        <summary>SmartScreen says unknown publisher.</summary>
+        <p>The build isn't code-signed. Choose <em>More info &rarr; Run anyway</em>. The checksum is published so you can confirm the file first.</p>
+      </details>
+      <details>
+        <summary>Will it survive a game update?</summary>
+        <p>Offsets are fetched for the exact client build that's running, so a game update doesn't need a new release. A change to the game's own structure can need a patch &mdash; that's what updates are for.</p>
+      </details>
+    </section>
+
+    <section class="close">
+      <h2>Download and go.</h2>
+      <div class="actions">
+        <a class="btn btn-solid" href="https://github.com/lolcaken/the-moath-macro/releases/latest">
+          <span>Download for Windows</span>
+        </a>
+        <a class="btn" href="https://github.com/lolcaken/the-moath-macro/releases/latest">All builds</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-left">
+      <svg class="mark sm" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="9.4" cy="9" r="4.6" fill="currentColor" />
+        <circle cx="22.6" cy="9" r="4.6" fill="currentColor" />
+        <circle cx="16" cy="17.4" r="9.6" fill="currentColor" />
+        <ellipse cx="12.1" cy="15.8" rx="2.5" ry="3.1" fill="#000" transform="rotate(-20 12.1 15.8)" />
+        <ellipse cx="19.9" cy="15.8" rx="2.5" ry="3.1" fill="#000" transform="rotate(20 19.9 15.8)" />
+      </svg>
+      <span class="wordmark">PANDA</span>
+      <span class="foot-note">Fisch automation &middot; external overlay &middot; Windows x64</span>
+    </div>
+    <div class="foot-right">
+      <a href="#top">Top</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="site.js"></script>
+</body>
+</html>
