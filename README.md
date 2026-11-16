@@ -1,6 +1,6 @@
 # panda-site
 
-Download page for PANDA. One file, no build step:
+Public download page for CHIMERA. One file, no build step:
 
 ```
 index.html
